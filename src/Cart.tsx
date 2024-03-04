@@ -13,8 +13,11 @@ const Cart = (): React.JSX.Element => {
     cartState.getState().products
   );
 
+  const [total, updateTotal] = useState<number>(cartState.getState().total);
+
   const listener = cartState.subscribe(() => {
     updateCart([...cartState.getState().products]);
+    updateTotal(cartState.getState().total);
   });
 
   const calculateQuantity = (list: IProduct[]): QuantityControl => {
@@ -43,6 +46,13 @@ const Cart = (): React.JSX.Element => {
             {prod.title}
           </p>
         ))}
+      <h4>
+        Total:{" "}
+        {new Intl.NumberFormat("us-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(total)}
+      </h4>
     </>
   );
 };
