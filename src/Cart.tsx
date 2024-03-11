@@ -37,8 +37,8 @@ const Cart = (): React.JSX.Element => {
   }, [listener]);
 
   return (
-    <>
-      <h2>Cart</h2>
+    <section className="min-h-[87vh] min-w-[30vw] shadow-inner rounded-sm p-4 relative">
+      <h2 className="text-title">Cart</h2>
       {uniqueCart.length !== 0 &&
         uniqueCart.map((prod) => (
           <p key={prod.id}>
@@ -46,14 +46,16 @@ const Cart = (): React.JSX.Element => {
             {prod.title}
           </p>
         ))}
-      <h4>
-        Total:{" "}
-        {new Intl.NumberFormat("us-US", {
-          style: "currency",
-          currency: "USD",
-        }).format(total)}
-      </h4>
-    </>
+      <div className="absolute bg-secondary bottom-0 w-[97%] px-2 py-3">
+        <h4 className="text-body-medium text-lg text-white">
+          Total:{" "}
+          {new Intl.NumberFormat("us-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(total)}
+        </h4>
+      </div>
+    </section>
   );
 };
 
