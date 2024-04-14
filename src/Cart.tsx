@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 // @ts-ignore
-import { cartState, calculateTotal } from "@hbler/api";
+import { cartState } from "@hbler/api";
 import { IProduct } from "./interfaces/IProduct";
+import CartCard from "./CartCard";
 
 interface QuantityControl {
   [id: string]: number;
@@ -37,15 +38,20 @@ const Cart = (): React.JSX.Element => {
   }, [listener]);
 
   return (
-    <section className="min-h-[87vh] min-w-[30vw] shadow-inner rounded-sm p-4 relative">
-      <h2 className="text-title">Cart</h2>
-      {uniqueCart.length !== 0 &&
-        uniqueCart.map((prod) => (
-          <p key={prod.id}>
-            <span>{productsQuantity[prod.id]}x </span>
-            {prod.title}
-          </p>
-        ))}
+    <section className="min-h-[87vh] min-w-[30vw] shadow-inner rounded-sm p-4 pt-16 relative">
+      <div className="absolute bg-secondary top-0 w-[97%] px-2 py-3">
+        <h2 className="text-title text-lg text-white">Cart</h2>
+      </div>
+      <div className="flex flex-col gap-2">
+        {uniqueCart.length !== 0 &&
+          uniqueCart.map((prod) => (
+            <CartCard
+              key={prod.id}
+              qtt={productsQuantity[prod.id]}
+              prod={prod}
+            />
+          ))}
+      </div>
       <div className="absolute bg-secondary bottom-0 w-[97%] px-2 py-3">
         <h4 className="text-body-medium text-lg text-white">
           Total:{" "}
